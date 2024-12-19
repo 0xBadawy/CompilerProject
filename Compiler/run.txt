@@ -1,0 +1,12 @@
+
+flex LexFile.l
+yacc -d YaccFile.y  
+gcc lex.yy.c -o lexer
+gcc YaccFile.tab.c lex.yy.c -o program
+
+
+
+
+./a.exe
+lex LexFile.l       
+calc
