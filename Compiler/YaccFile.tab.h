@@ -56,7 +56,11 @@ extern int yydebug;
      CHAR = 265,
      STRING = 266,
      PRINT = 267,
-     FOR = 268
+     FOR = 268,
+     IF = 269,
+     THEN = 270,
+     ELSE = 271,
+     UMINS = 272
    };
 #endif
 
@@ -65,7 +69,7 @@ extern int yydebug;
 typedef union YYSTYPE
 {
 /* Line 2058 of yacc.c  */
-#line 15 "YaccFile.y"
+#line 14 "YaccFile.y"
 
  int in;
  float f1;
@@ -75,7 +79,7 @@ typedef union YYSTYPE
 
 
 /* Line 2058 of yacc.c  */
-#line 79 "YaccFile.tab.h"
+#line 83 "YaccFile.tab.h"
 } YYSTYPE;
 # define YYSTYPE_IS_TRIVIAL 1
 # define yystype YYSTYPE /* obsolescent; will be withdrawn */
