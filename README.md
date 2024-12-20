@@ -24,9 +24,9 @@ This project involves building a compiler using Lex and Yacc. The instructions b
 
 ### Step 4: Install VS Code Extensions
 Install the following extensions in Visual Studio Code:
-- [Flex](https://marketplace.visualstudio.com/items?itemName=daohong-emilio.yash)
-- [Lex](https://marketplace.visualstudio.com/items?itemName=luniclynx.lex)
-- [Bison](https://marketplace.visualstudio.com/items?itemName=luniclynx.bison)
+- [Flex Extension](https://marketplace.visualstudio.com/items?itemName=daohong-emilio.yash)
+- [Lex Extension](https://marketplace.visualstudio.com/items?itemName=luniclynx.lex)
+- [Bison Extension](https://marketplace.visualstudio.com/items?itemName=luniclynx.bison)
 
 #### How Run Lex Only ?
 Run the following command in the terminal:
