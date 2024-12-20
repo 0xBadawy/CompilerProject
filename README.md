@@ -7,13 +7,13 @@ This project involves building a compiler using Lex and Yacc. The instructions b
 ## How to Run Lex and Yacc in Visual Studio Code
 
 ### Step 1: Install Flex and Bison
-- Download and install Flex and Bison from [WinFlexBison](https://sourceforge.net/projects/winflexbison/) or the `Program/Program.zip` file.
+- Download and install Flex and Bison from [WinFlexBison](https://sourceforge.net/projects/winflexbison/) or you can download the .exe file from `Program/Program.zip` file.
 
 ### Step 2: Update Environment Variables
 1. Open the Start menu and search for "Environment Variables."
 2. Click on **Environment Variables**.
 3. Edit the `Path` variable by adding:
-   - The path to `flex` and `bison/bin`.
+   - The path to `flex`.
    - The path to `gcc`.
 
 ### Step 3: Create Files
@@ -124,7 +124,15 @@ Run `GUI.py` to start the graphical interface.
   flex LexFile.l; yacc -d YaccFile.y; gcc lex.yy.c -o lexer; gcc YaccFile.tab.c lex.yy.c -o program
   ```
 
+
+### Youtube Videos 
+- [How to install in VS-Code](https://www.youtube.com/watch?v=Zs99QnRUt5c&t)
+- [Arabic Flex Tutorial](https://www.youtube.com/watch?v=Zs99QnRUt5c&list=PLd_aE3prUmHfvPeSMzUou3dUEMWIAjT-X)
+
+
 ---
+
+
 
 This README file provides a comprehensive guide to setting up, running, and enhancing your compiler project with a GUI. Make sure to follow each step carefully for a successful implementation.
 
