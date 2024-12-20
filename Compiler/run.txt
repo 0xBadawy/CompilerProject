@@ -4,9 +4,21 @@ yacc -d YaccFile.y
 gcc lex.yy.c -o lexer
 gcc YaccFile.tab.c lex.yy.c -o program
 
-
-
-
 ./a.exe
 lex LexFile.l       
 calc
+
+
+flex text1.l
+lex text1.l   
+gcc lex.yy.c -o a
+./a.exe
+
+
+
+// run lex only
+flex text1.l; gcc lex.yy.c -o a; ./a.exe
+
+// run lex and yacc
+flex LexFile.l; yacc -d YaccFile.y; gcc lex.yy.c -o lexer; gcc YaccFile.tab.c lex.yy.c -o program
+
