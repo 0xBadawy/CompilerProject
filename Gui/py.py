@@ -16,7 +16,7 @@ def compile_program():
         result = subprocess.run(command, shell=True, check=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
         print(result.stdout)
 
-def run_calculator():
+def use_GUI():
     user_input = text_input.get("1.0", tk.END).strip()  
     process = subprocess.Popen(["Compiler\\program.exe"], stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
     stdout, stderr = process.communicate(input=user_input.encode())  
@@ -45,7 +45,7 @@ result_output.grid(row=0, column=1, columnspan=3, padx=10, pady=10, sticky="nsew
 #compile_button = ctk.CTkButton(root, text="Compile", command=compile_program, width=200, height=40, font=("Consolas", 12, "bold"))
 #compile_button.grid(row=1, column=0, padx=20, pady=10)
 
-run_button = ctk.CTkButton(root, text="Run Code", command=run_calculator, width=200, height=40, font=("Consolas", 15, "bold"))
+run_button = ctk.CTkButton(root, text="Run Code", command=use_GUI, width=200, height=40, font=("Consolas", 15, "bold"))
 run_button.grid(row=2, column=0, padx=20, pady=10)
 
 root.mainloop()
