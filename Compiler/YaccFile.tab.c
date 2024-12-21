@@ -489,12 +489,12 @@ static const yytype_int8 yyrhs[] =
 /* YYRLINE[YYN] -- source line where rule number YYN was defined.  */
 static const yytype_uint16 yyrline[] =
 {
-       0,    42,    42,    43,    45,    46,    47,    48,    49,    50,
-      51,    54,   129,   130,   132,   156,   179,   205,   232,   250,
-     269,   277,   286,   290,   295,   296,   297,   298,   300,   301,
-     302,   303,   304,   305,   312,   328,   332,   338,   347,   355,
-     364,   370,   379,   386,   398,   408,   409,   410,   412,   413,
-     417,   419,   420,   421,   422,   423
+       0,    43,    43,    44,    46,    47,    48,    49,    50,    51,
+      52,    58,   121,   122,   127,   148,   168,   188,   208,   226,
+     250,   258,   272,   276,   281,   282,   283,   284,   288,   289,
+     290,   291,   292,   293,   308,   324,   340,   348,   358,   366,
+     376,   384,   394,   402,   420,   436,   437,   438,   446,   447,
+     454,   462,   463,   464,   465,   466
 };
 #endif
 
@@ -1489,581 +1489,543 @@ yyreduce:
     {
         case 11:
 /* Line 1792 of yacc.c  */
-#line 54 "YaccFile.y"
-    {int count_flag=0; int cond_flag=0;
-						   if(l[op[1]]==1)
-						     cond_flag=1;
-						   if(d[2]==1)
-						   {
-						     count_flag=1;
-						     if(d[0]==1)
-						       --loc[d[1]];
-						     else if(d[0]==2)
-						       ++loc[d[1]];
-						   }
-						   if(d[2]==2)
-						   {
-						     if(d[0]==1)
-						       --A[d[1]];
-						     else if(d[0]==2)
-						       ++A[d[1]];
-						   }
-						   if(op[0]==1&&d[0]==1) // less than and increment
-						   {
-						     if(cond_flag==1&&count_flag==1)
-						     {
-						       int i;
-						       for(i=(yyvsp[(3) - (11)].in);loc[op[1]]<op[2];loc[d[1]]+=(yyvsp[(7) - (11)].in))
-						         printf("loop executed %d\n", loc[d[1]]);
-						     }
-						     else if(cond_flag==0 && count_flag==0)
-						     {
-						       int i;
-						       for(i=(yyvsp[(3) - (11)].in);A[op[1]]<op[2];A[d[1]]+=(yyvsp[(7) - (11)].in))
-						         printf("loop executed %d\n", A[d[1]]);
-						     }
-						     else if(cond_flag==0 && count_flag==1)
-						     {
-						       int i;
-						       for(i=(yyvsp[(3) - (11)].in);A[op[1]]<op[2];loc[d[1]]+=(yyvsp[(7) - (11)].in))
-						         printf("loop executed %d\n", loc[d[1]]);
-						     }
-						     else
-						     {
-						       int i;
-						       for(i=(yyvsp[(3) - (11)].in);loc[op[1]]<op[2];A[d[1]+=(yyvsp[(7) - (11)].in)])
-						         printf("loop executed %d\n", A[d[1]]);
-						     }
-						   }
-						   else if(op[0]==2 && d[0]==2) // greater than and decrement
-						   {
-						     if(cond_flag==1&&count_flag==1)
-						     {
-						       int i;
-						       for(i=(yyvsp[(3) - (11)].in);loc[op[1]]>op[2];loc[d[1]]-=(yyvsp[(7) - (11)].in))
-						         printf("loop executed %d\n", loc[d[1]]);
-						     }
-						     else if(cond_flag==0 && count_flag==0)
-						     {
-						       int i;
-						       for(i=(yyvsp[(3) - (11)].in);A[op[1]]>op[2];A[d[1]]-=(yyvsp[(7) - (11)].in))
-						         printf("loop executed %d\n", A[d[1]]);
-						     }
-						     else if(cond_flag==0 && count_flag==1)
-						     {
-						       int i;
-						       for(i=(yyvsp[(3) - (11)].in);A[op[1]]>op[2];loc[d[1]]-=(yyvsp[(7) - (11)].in))
-						         printf("loop executed %d\n", loc[d[1]]);
-						     }
-						     else
-						     {
-						       int i;
-						       for(i=(yyvsp[(3) - (11)].in);loc[op[1]]>op[2];A[d[1]-=(yyvsp[(7) - (11)].in)])
-						         printf("loop executed %d\n", A[d[1]]);
-						     }
-						   }
-						   }
+#line 58 "YaccFile.y"
+    {
+    int count_flag=0, cond_flag=0;
+    if(l[op[1]]==1)cond_flag=1;
+    if(d[2]==1){
+        count_flag=1;
+        if(d[0]==1)--loc[d[1]];
+        else if(d[0]==2)++loc[d[1]];
+    }
+    if(d[2]==2){
+        if(d[0]==1)--A[d[1]];
+        else if(d[0]==2)++A[d[1]];
+    }
+
+	// less than and increment
+    if(op[0]==1&&d[0]==1){
+        if(cond_flag==1&&count_flag==1){
+        int i;
+        for(i=(yyvsp[(3) - (11)].in);loc[op[1]]<op[2];loc[d[1]]+=(yyvsp[(7) - (11)].in))
+            printf("loop executed %d\n", loc[d[1]]);
+        }
+        else if(cond_flag==0 && count_flag==0){
+        int i;
+        for(i=(yyvsp[(3) - (11)].in);A[op[1]]<op[2];A[d[1]]+=(yyvsp[(7) - (11)].in))
+            printf("loop executed %d\n", A[d[1]]);
+        }
+        else if(cond_flag==0 && count_flag==1){
+        int i;
+        for(i=(yyvsp[(3) - (11)].in);A[op[1]]<op[2];loc[d[1]]+=(yyvsp[(7) - (11)].in))
+            printf("loop executed %d\n", loc[d[1]]);
+        }
+        else{
+        int i;
+        for(i=(yyvsp[(3) - (11)].in);loc[op[1]]<op[2];A[d[1]+=(yyvsp[(7) - (11)].in)])
+            printf("loop executed %d\n", A[d[1]]);
+        }
+    }
+    else if(op[0]==2 && d[0]==2){
+        if(cond_flag==1&&count_flag==1){
+        int i;
+        for(i=(yyvsp[(3) - (11)].in);loc[op[1]]>op[2];loc[d[1]]-=(yyvsp[(7) - (11)].in))
+            printf("loop executed %d\n", loc[d[1]]);
+        }
+        else if(cond_flag==0 && count_flag==0){
+        int i;
+        for(i=(yyvsp[(3) - (11)].in);A[op[1]]>op[2];A[d[1]]-=(yyvsp[(7) - (11)].in))
+            printf("loop executed %d\n", A[d[1]]);
+        }
+        else if(cond_flag==0 && count_flag==1){
+        int i;
+        for(i=(yyvsp[(3) - (11)].in);A[op[1]]>op[2];loc[d[1]]-=(yyvsp[(7) - (11)].in))
+            printf("loop executed %d\n", loc[d[1]]);
+        }
+        else{
+        int i;
+        for(i=(yyvsp[(3) - (11)].in);loc[op[1]]>op[2];A[d[1]-=(yyvsp[(7) - (11)].in)])
+            printf("loop executed %d\n", A[d[1]]);
+        }
+    }
+}
     break;
 
   case 12:
 /* Line 1792 of yacc.c  */
-#line 129 "YaccFile.y"
+#line 121 "YaccFile.y"
     {op[0]=1; op[1]=(yyvsp[(1) - (3)].in); op[2]=(yyvsp[(3) - (3)].f1);}
     break;
 
   case 13:
 /* Line 1792 of yacc.c  */
-#line 130 "YaccFile.y"
+#line 122 "YaccFile.y"
     {op[0]=2; op[1]=(yyvsp[(1) - (3)].in); op[2]=(yyvsp[(3) - (3)].f1);}
     break;
 
   case 14:
 /* Line 1792 of yacc.c  */
-#line 132 "YaccFile.y"
-    {if(l[(yyvsp[(2) - (3)].in)]==1)
-                      {
-		        ++loc[(yyvsp[(2) - (3)].in)];
-			printf("%d\n",loc[(yyvsp[(2) - (3)].in)]);
-			(yyval.in)=1;
-
-			d[0]=1;  //mean store increment operation
-			d[1]=(yyvsp[(2) - (3)].in);
-			d[2]=1;
-		      }
-		      else if(var[(yyvsp[(2) - (3)].in)]==1)
-		      {
-		        ++A[(yyvsp[(2) - (3)].in)];
-			printf("%d\n",A[(yyvsp[(2) - (3)].in)]);
-			(yyval.in)=1;
-			d[0]=1;
-			d[1]=(yyvsp[(2) - (3)].in);
-			d[2]=2;
-		      
-		      }
-		      else 
-		        printf("wrong input\n");
-
-                        }
+#line 127 "YaccFile.y"
+    {
+	if(l[(yyvsp[(2) - (3)].in)]==1){
+		++loc[(yyvsp[(2) - (3)].in)];
+		printf("%d\n",loc[(yyvsp[(2) - (3)].in)]);
+		(yyval.in)=1;
+		d[0]=1;  //mean store increment operation
+		d[1]=(yyvsp[(2) - (3)].in);
+		d[2]=1;
+	}
+	else if(var[(yyvsp[(2) - (3)].in)]==1){
+		++A[(yyvsp[(2) - (3)].in)];
+		printf("%d\n",A[(yyvsp[(2) - (3)].in)]);
+		(yyval.in)=1;
+		d[0]=1;
+		d[1]=(yyvsp[(2) - (3)].in);
+		d[2]=2;	
+	}
+	else 
+	printf("wrong input\n");
+}
     break;
 
   case 15:
 /* Line 1792 of yacc.c  */
-#line 156 "YaccFile.y"
-    {if(l[(yyvsp[(2) - (3)].in)]==1)
-                      {
-		        --loc[(yyvsp[(2) - (3)].in)];
-			(yyval.in)=1;
-                         printf("%d\n",loc[(yyvsp[(2) - (3)].in)]);
-			d[0]=2;  //mean store increment operation
-			d[1]=(yyvsp[(2) - (3)].in);
-			d[2]=1;
-		      }
-		      else if(var[(yyvsp[(2) - (3)].in)]==1)
-		      {
-		        --A[(yyvsp[(2) - (3)].in)];
-			printf("%d\n",A[(yyvsp[(2) - (3)].in)]);
-			(yyval.in)=1;
-			d[0]=2;
-			d[1]=(yyvsp[(2) - (3)].in);
-			d[2]=2;
-		      
-		      }
-		      else 
-		        printf("wrong input\n");
-
-                        }
+#line 148 "YaccFile.y"
+    {
+	if(l[(yyvsp[(2) - (3)].in)]==1){
+		--loc[(yyvsp[(2) - (3)].in)];
+		(yyval.in)=1;
+		printf("%d\n",loc[(yyvsp[(2) - (3)].in)]);
+		d[0]=2;  //mean store increment operation
+		d[1]=(yyvsp[(2) - (3)].in);
+		d[2]=1;
+	}
+	else if(var[(yyvsp[(2) - (3)].in)]==1){
+		--A[(yyvsp[(2) - (3)].in)];
+		printf("%d\n",A[(yyvsp[(2) - (3)].in)]);
+		(yyval.in)=1;
+		d[0]=2;
+		d[1]=(yyvsp[(2) - (3)].in);
+		d[2]=2;	
+	}
+	else printf("wrong input\n");
+}
     break;
 
   case 16:
 /* Line 1792 of yacc.c  */
-#line 179 "YaccFile.y"
-    {if(l[(yyvsp[(1) - (3)].in)]==1)
-                      {
-		       printf("%d\n",loc[(yyvsp[(1) - (3)].in)]);
-		        loc[(yyvsp[(1) - (3)].in)]++;
-			
-			(yyval.in)=1;
-
-			d[0]=1;  //mean store increment operation
-			d[1]=(yyvsp[(1) - (3)].in);
-			d[2]=1;
-		      }
-		      else if(var[(yyvsp[(1) - (3)].in)]==1)
-		      {
-		         printf("%d\n",A[(yyvsp[(1) - (3)].in)]);
-		        A[(yyvsp[(1) - (3)].in)]++;
-			
-			(yyval.in)=1;
-			d[0]=1;
-			d[1]=(yyvsp[(1) - (3)].in);
-			d[2]=2;
-		      
-		      }
-		      else 
-		        printf("wrong input\n");
-
-                        }
+#line 168 "YaccFile.y"
+    {
+	if(l[(yyvsp[(1) - (3)].in)]==1){
+		printf("%d\n",loc[(yyvsp[(1) - (3)].in)]);
+		loc[(yyvsp[(1) - (3)].in)]++;
+		(yyval.in)=1;
+		d[0]=1;  //mean store increment operation
+		d[1]=(yyvsp[(1) - (3)].in);
+		d[2]=1;
+	}
+	else if(var[(yyvsp[(1) - (3)].in)]==1){
+		printf("%d\n",A[(yyvsp[(1) - (3)].in)]);
+		A[(yyvsp[(1) - (3)].in)]++;
+		(yyval.in)=1;
+		d[0]=1;
+		d[1]=(yyvsp[(1) - (3)].in);
+		d[2]=2;	
+	}
+	else printf("wrong input\n");
+}
     break;
 
   case 17:
 /* Line 1792 of yacc.c  */
-#line 205 "YaccFile.y"
-    {if(l[(yyvsp[(1) - (3)].in)]==1)
-                      {
-		       printf("%d\n",loc[(yyvsp[(1) - (3)].in)]);
-		        loc[(yyvsp[(1) - (3)].in)]--;
-			
-			(yyval.in)=1;
-
-			d[0]=2;  //mean store increment operation
-			d[1]=(yyvsp[(1) - (3)].in);
-			d[2]=1;
-		      }
-		      else if(var[(yyvsp[(1) - (3)].in)]==1)
-		      {
-		         printf("%d\n",A[(yyvsp[(1) - (3)].in)]);
-		        A[(yyvsp[(1) - (3)].in)]--;
-			
-			(yyval.in)=1;
-			d[0]=2;
-			d[1]=(yyvsp[(1) - (3)].in);
-			d[2]=2;
-		      
-		      }
-		      else 
-		        printf("wrong input\n");
-
-                        }
+#line 188 "YaccFile.y"
+    {
+	if(l[(yyvsp[(1) - (3)].in)]==1){
+		printf("%d\n",loc[(yyvsp[(1) - (3)].in)]);
+		loc[(yyvsp[(1) - (3)].in)]--;
+		(yyval.in)=1;
+		d[0]=2;  //mean store increment operation
+		d[1]=(yyvsp[(1) - (3)].in);
+		d[2]=1;
+	}
+	else if(var[(yyvsp[(1) - (3)].in)]==1){
+		printf("%d\n",A[(yyvsp[(1) - (3)].in)]);
+		A[(yyvsp[(1) - (3)].in)]--;
+		(yyval.in)=1;
+		d[0]=2;
+		d[1]=(yyvsp[(1) - (3)].in);
+		d[2]=2;	
+	}
+	else printf("wrong input\n");
+}
     break;
 
   case 18:
 /* Line 1792 of yacc.c  */
-#line 232 "YaccFile.y"
-    {if(l[(yyvsp[(1) - (4)].in)]==1)
-				{
-				  loc[(yyvsp[(1) - (4)].in)]+=(yyvsp[(4) - (4)].in);
-				  (yyval.in)=(yyvsp[(4) - (4)].in);
-				  d[0]=1;
-				  d[1]=(yyvsp[(1) - (4)].in);
-				  d[2]=1;
-				}
-				else if(var[(yyvsp[(1) - (4)].in)]==1)
-				{
-				  A[(yyvsp[(1) - (4)].in)]+=(yyvsp[(4) - (4)].in);
-				  (yyval.in)=(yyvsp[(4) - (4)].in);
-				  d[0]=1;
-				  d[1]=(yyvsp[(1) - (4)].in);
-				  d[2]=2;
-				}
-				else
-				  printf("variable not declared before\n");}
+#line 208 "YaccFile.y"
+    {
+	if(l[(yyvsp[(1) - (4)].in)]==1){
+		loc[(yyvsp[(1) - (4)].in)]+=(yyvsp[(4) - (4)].in);
+		(yyval.in)=(yyvsp[(4) - (4)].in);
+		d[0]=1;
+		d[1]=(yyvsp[(1) - (4)].in);
+		d[2]=1;
+	}
+	else if(var[(yyvsp[(1) - (4)].in)]==1){
+		A[(yyvsp[(1) - (4)].in)]+=(yyvsp[(4) - (4)].in);
+		(yyval.in)=(yyvsp[(4) - (4)].in);
+		d[0]=1;
+		d[1]=(yyvsp[(1) - (4)].in);
+		d[2]=2;
+	}
+	else printf("variable not declared before\n");
+}
     break;
 
   case 19:
 /* Line 1792 of yacc.c  */
-#line 250 "YaccFile.y"
-    {if(l[(yyvsp[(1) - (4)].in)]==1)
-				{
-				  loc[(yyvsp[(1) - (4)].in)]-=(yyvsp[(4) - (4)].in);
-				  (yyval.in)=(yyvsp[(4) - (4)].in);
-				  d[0]=2;
-				  d[1]=(yyvsp[(1) - (4)].in);
-				  d[2]=1;
-				}
-				else if(var[(yyvsp[(1) - (4)].in)]==1)
-				{
-				  A[(yyvsp[(1) - (4)].in)]-=(yyvsp[(4) - (4)].in);
-				  (yyval.in)=(yyvsp[(4) - (4)].in);
-				  d[0]=2;
-				  d[1]=(yyvsp[(1) - (4)].in);
-				  d[2]=2;
-				}
-				else
-				  printf("variable not declared before\n");}
+#line 226 "YaccFile.y"
+    {
+	if(l[(yyvsp[(1) - (4)].in)]==1){
+		loc[(yyvsp[(1) - (4)].in)]-=(yyvsp[(4) - (4)].in);
+		(yyval.in)=(yyvsp[(4) - (4)].in);
+		d[0]=2;
+		d[1]=(yyvsp[(1) - (4)].in);
+		d[2]=1;
+	}
+	else if(var[(yyvsp[(1) - (4)].in)]==1){
+		A[(yyvsp[(1) - (4)].in)]-=(yyvsp[(4) - (4)].in);
+		(yyval.in)=(yyvsp[(4) - (4)].in);
+		d[0]=2;
+		d[1]=(yyvsp[(1) - (4)].in);
+		d[2]=2;
+	}
+	else printf("variable not declared before\n");}
     break;
 
   case 20:
 /* Line 1792 of yacc.c  */
-#line 269 "YaccFile.y"
-    {if(l[(yyvsp[(2) - (4)].in)]==0) 
-                            {
-			      loc[(yyvsp[(2) - (4)].in)]=(yyvsp[(4) - (4)].in);
-			      (yyval.in)=loc[(yyvsp[(2) - (4)].in)];
-			      l[(yyvsp[(2) - (4)].in)]=1;
-			    }
-			   }
+#line 250 "YaccFile.y"
+    {
+	if(l[(yyvsp[(2) - (4)].in)]==0){
+		loc[(yyvsp[(2) - (4)].in)]=(yyvsp[(4) - (4)].in);
+		(yyval.in)=loc[(yyvsp[(2) - (4)].in)];
+		l[(yyvsp[(2) - (4)].in)]=1;
+	}
+	}
     break;
 
   case 21:
 /* Line 1792 of yacc.c  */
-#line 277 "YaccFile.y"
-    { if(var[(yyvsp[(1) - (3)].in)]==1)
-                             {
-			       (yyval.in)=A[(yyvsp[(1) - (3)].in)];
-			       A[(yyvsp[(1) - (3)].in)]=(yyvsp[(3) - (3)].in);
-			     }
-			     else
-			       printf("wrong input\n");
-			   }
+#line 258 "YaccFile.y"
+    {
+	if(var[(yyvsp[(1) - (3)].in)]==1){
+		(yyval.in)=A[(yyvsp[(1) - (3)].in)];
+		A[(yyvsp[(1) - (3)].in)]=(yyvsp[(3) - (3)].in);
+	}else
+		printf("wrong input\n");
+}
     break;
 
   case 22:
 /* Line 1792 of yacc.c  */
-#line 286 "YaccFile.y"
-    {if((yyvsp[(3) - (8)].in)==1) 
-                                         printf("if executed"); 
-                                       else 
-                                         printf("if not executed");}
+#line 272 "YaccFile.y"
+    {
+	if((yyvsp[(3) - (8)].in)==1)printf("if executed"); 
+	else printf("if not executed");}
     break;
 
   case 23:
 /* Line 1792 of yacc.c  */
-#line 290 "YaccFile.y"
-    {if((yyvsp[(3) - (12)].in)==1)
-                                         printf("if executed");
-               		               else
-                                         printf("else executed");}
+#line 276 "YaccFile.y"
+    {
+	if((yyvsp[(3) - (12)].in)==1)printf("if executed");
+	else printf("else executed");}
     break;
 
   case 24:
 /* Line 1792 of yacc.c  */
-#line 295 "YaccFile.y"
+#line 281 "YaccFile.y"
     {(yyval.in)=(yyvsp[(1) - (3)].in)&&(yyvsp[(3) - (3)].in);}
     break;
 
   case 25:
 /* Line 1792 of yacc.c  */
-#line 296 "YaccFile.y"
+#line 282 "YaccFile.y"
     {(yyval.in)=(yyvsp[(1) - (3)].in)||(yyvsp[(3) - (3)].in);}
     break;
 
   case 26:
 /* Line 1792 of yacc.c  */
-#line 297 "YaccFile.y"
+#line 283 "YaccFile.y"
     {(yyval.in)=!(yyvsp[(2) - (2)].in);}
     break;
 
   case 27:
 /* Line 1792 of yacc.c  */
-#line 298 "YaccFile.y"
+#line 284 "YaccFile.y"
     {(yyval.in)=(yyvsp[(1) - (1)].in);}
     break;
 
   case 28:
 /* Line 1792 of yacc.c  */
-#line 300 "YaccFile.y"
+#line 288 "YaccFile.y"
     { if((yyvsp[(1) - (3)].f1)>(yyvsp[(3) - (3)].f1)) (yyval.in)=1; else (yyval.in)=0; }
     break;
 
   case 29:
 /* Line 1792 of yacc.c  */
-#line 301 "YaccFile.y"
+#line 289 "YaccFile.y"
     { if((yyvsp[(1) - (3)].f1)<(yyvsp[(3) - (3)].f1)) (yyval.in)=1; else (yyval.in)=0; }
     break;
 
   case 30:
 /* Line 1792 of yacc.c  */
-#line 302 "YaccFile.y"
+#line 290 "YaccFile.y"
     { if((yyvsp[(1) - (4)].f1)>=(yyvsp[(4) - (4)].f1)) (yyval.in)=1; else (yyval.in)=0; }
     break;
 
   case 31:
 /* Line 1792 of yacc.c  */
-#line 303 "YaccFile.y"
+#line 291 "YaccFile.y"
     { if((yyvsp[(1) - (4)].f1)<=(yyvsp[(4) - (4)].f1)) (yyval.in)=1; else (yyval.in)=0; }
     break;
 
   case 32:
 /* Line 1792 of yacc.c  */
-#line 304 "YaccFile.y"
+#line 292 "YaccFile.y"
     { if((yyvsp[(1) - (4)].f1)==(yyvsp[(4) - (4)].f1)) (yyval.in)=1; else (yyval.in)=0; }
     break;
 
   case 33:
 /* Line 1792 of yacc.c  */
-#line 305 "YaccFile.y"
+#line 293 "YaccFile.y"
     { if((yyvsp[(1) - (4)].f1)!=(yyvsp[(4) - (4)].f1)) (yyval.in)=1; else (yyval.in)=0; }
     break;
 
   case 34:
 /* Line 1792 of yacc.c  */
-#line 312 "YaccFile.y"
-    {if(var[(yyvsp[(3) - (4)].in)]==1)
-                          printf("%d", A[(yyvsp[(3) - (4)].in)]);
-			else if(var[(yyvsp[(3) - (4)].in)]==2)
-			  printf("%g", B[(yyvsp[(3) - (4)].in)]);
-			else if(var[(yyvsp[(3) - (4)].in)]==3)
-			  printf("%c", C[(yyvsp[(3) - (4)].in)]);
-			else if(var[(yyvsp[(3) - (4)].in)]==4)
-			{
-			  int x;
-			  for(x=1;x<D[(yyvsp[(3) - (4)].in)][0];x++)
-  			    printf("%c", D[(yyvsp[(3) - (4)].in)][x]);
-			}
-			else if(var[(yyvsp[(3) - (4)].in)]==0)
-			  printf("variable not declared before");
-			else
-			  printf("wrong input");}
+#line 308 "YaccFile.y"
+    {
+	if(var[(yyvsp[(3) - (4)].in)]==1)
+		printf("%d", A[(yyvsp[(3) - (4)].in)]);
+	else if(var[(yyvsp[(3) - (4)].in)]==2)
+		printf("%g", B[(yyvsp[(3) - (4)].in)]);
+	else if(var[(yyvsp[(3) - (4)].in)]==3)
+		printf("%c", C[(yyvsp[(3) - (4)].in)]);
+	else if(var[(yyvsp[(3) - (4)].in)]==4){
+		int x;
+		for(x=1;x<D[(yyvsp[(3) - (4)].in)][0];x++)
+		printf("%c", D[(yyvsp[(3) - (4)].in)][x]);
+	}
+	else if(var[(yyvsp[(3) - (4)].in)]==0)
+		printf("variable not declared before");
+	else
+		printf("wrong input");}
     break;
 
   case 35:
 /* Line 1792 of yacc.c  */
-#line 328 "YaccFile.y"
-    {int x;
-                        for(x=0;x<(yyvsp[(3) - (4)].s)[0];x++)
-			  printf("%c", (yyvsp[(3) - (4)].s)[x]);}
+#line 324 "YaccFile.y"
+    {
+	int x;
+	for(x=0;x<(yyvsp[(3) - (4)].s)[0];x++)
+		printf("%c", (yyvsp[(3) - (4)].s)[x]);}
     break;
 
   case 36:
 /* Line 1792 of yacc.c  */
-#line 332 "YaccFile.y"
-    {if(var[(yyvsp[(2) - (2)].in)]==0)
-                                var[(yyvsp[(2) - (2)].in)]=1;
-		              else if(var[(yyvsp[(2) - (2)].in)]==1)
-		                printf("variable already declared before with the same type\n");
-		              else
-		                printf("variable already declared before with another type\n");}
+#line 340 "YaccFile.y"
+    {
+	if(var[(yyvsp[(2) - (2)].in)]==0)
+		var[(yyvsp[(2) - (2)].in)]=1;
+	else if(var[(yyvsp[(2) - (2)].in)]==1)
+		printf("variable already declared before with the same type\n");
+	else
+		printf("variable already declared before with another type\n");}
     break;
 
   case 37:
 /* Line 1792 of yacc.c  */
-#line 338 "YaccFile.y"
-    {if(var[(yyvsp[(2) - (4)].in)]==0)
-                              {
-			        var[(yyvsp[(2) - (4)].in)]=1;
-			        A[(yyvsp[(2) - (4)].in)]=(yyvsp[(4) - (4)].in);
-			      }
-			      else if(var[(yyvsp[(2) - (4)].in)]==1)
-			        printf("variable already declared before with the same type\n");
-		              else
-		                printf("variable already declared before with another type\n");}
+#line 348 "YaccFile.y"
+    {
+	if(var[(yyvsp[(2) - (4)].in)]==0){
+		var[(yyvsp[(2) - (4)].in)]=1;
+		A[(yyvsp[(2) - (4)].in)]=(yyvsp[(4) - (4)].in);
+	}
+	else if(var[(yyvsp[(2) - (4)].in)]==1)
+		printf("variable already declared before with the same type\n");
+	else
+		printf("variable already declared before with another type\n");}
     break;
 
   case 38:
 /* Line 1792 of yacc.c  */
-#line 347 "YaccFile.y"
-    {if(var[(yyvsp[(2) - (2)].in)]==0)
-	                       {
-			         var[(yyvsp[(2) - (2)].in)]=2;
-	                       }
-			       else if(var[(yyvsp[(2) - (2)].in)]==2)
-			         printf("variable already declared before with the same type\n");
-		               else
-		                 printf("variable already declared before with another type\n");}
+#line 358 "YaccFile.y"
+    {
+	if(var[(yyvsp[(2) - (2)].in)]==0)
+		var[(yyvsp[(2) - (2)].in)]=2;	
+	else if(var[(yyvsp[(2) - (2)].in)]==2)
+		printf("variable already declared before with the same type\n");
+	else
+		printf("variable already declared before with another type\n");}
     break;
 
   case 39:
 /* Line 1792 of yacc.c  */
-#line 355 "YaccFile.y"
-    {if(var[(yyvsp[(2) - (4)].in)]==0)
-	                      {
-			        var[(yyvsp[(2) - (4)].in)]=2;
-				B[(yyvsp[(2) - (4)].in)]=(yyvsp[(4) - (4)].f1);
-			      }
-                              else if(var[(yyvsp[(2) - (4)].in)]==2)
-			        printf("variable already declared before with the same type\n");
-		              else
-		                printf("variable already declared before with another type\n");}
+#line 366 "YaccFile.y"
+    {
+	if(var[(yyvsp[(2) - (4)].in)]==0){
+		var[(yyvsp[(2) - (4)].in)]=2;
+		B[(yyvsp[(2) - (4)].in)]=(yyvsp[(4) - (4)].f1);
+	}
+	else if(var[(yyvsp[(2) - (4)].in)]==2)
+		printf("variable already declared before with the same type\n");
+	else
+		printf("variable already declared before with another type\n");}
     break;
 
   case 40:
 /* Line 1792 of yacc.c  */
-#line 364 "YaccFile.y"
-    {if(var[(yyvsp[(2) - (2)].in)]==0)
-                                var[(yyvsp[(2) - (2)].in)]=3;
-			      else if(var[(yyvsp[(2) - (2)].in)]==3)
-				printf("variable already declared before with the same type\n");
-		              else
-		                printf("variable already declared before with another type\n");}
+#line 376 "YaccFile.y"
+    {
+	if(var[(yyvsp[(2) - (2)].in)]==0)
+		var[(yyvsp[(2) - (2)].in)]=3;
+	else if(var[(yyvsp[(2) - (2)].in)]==3)
+		printf("variable already declared before with the same type\n");
+	else
+		printf("variable already declared before with another type\n");}
     break;
 
   case 41:
 /* Line 1792 of yacc.c  */
-#line 370 "YaccFile.y"
-    {if(var[(yyvsp[(2) - (4)].in)]==0)
-                              {
-				var[(yyvsp[(2) - (4)].in)]=3;
-				C[(yyvsp[(2) - (4)].in)]=(yyvsp[(4) - (4)].ch);
-			      }
-			      else if(var[(yyvsp[(2) - (4)].in)]==3)
-				printf("variable already declared before with the same type\n");
-		              else
-		                printf("variable already declared before with another type\n");}
+#line 384 "YaccFile.y"
+    {
+	if(var[(yyvsp[(2) - (4)].in)]==0){
+		var[(yyvsp[(2) - (4)].in)]=3;
+		C[(yyvsp[(2) - (4)].in)]=(yyvsp[(4) - (4)].ch);
+	}
+	else if(var[(yyvsp[(2) - (4)].in)]==3)
+		printf("variable already declared before with the same type\n");
+	else
+		printf("variable already declared before with another type\n");}
     break;
 
   case 42:
 /* Line 1792 of yacc.c  */
-#line 379 "YaccFile.y"
-    {if(var[(yyvsp[(2) - (2)].in)]==0)
-                                var[(yyvsp[(2) - (2)].in)]=4;
-			      else if(var[(yyvsp[(2) - (2)].in)]==4)  
-			        printf("variable already declared before with the same type\n");
-		              else
-		                printf("variable already declared before with another type\n");}
+#line 394 "YaccFile.y"
+    {
+	if(var[(yyvsp[(2) - (2)].in)]==0)
+		var[(yyvsp[(2) - (2)].in)]=4;
+	else if(var[(yyvsp[(2) - (2)].in)]==4)  
+		printf("variable already declared before with the same type\n");
+	else
+		printf("variable already declared before with another type\n");}
     break;
 
   case 43:
 /* Line 1792 of yacc.c  */
-#line 386 "YaccFile.y"
-    {if(var[(yyvsp[(2) - (4)].in)]==0)
-                              {
-		                var[(yyvsp[(2) - (4)].in)]=4;
-		                int i;
-			        for(i=0;i<(yyvsp[(4) - (4)].s)[0];i++)
-			          D[(yyvsp[(2) - (4)].in)][i]=(yyvsp[(4) - (4)].s)[i];
-			      }
-			      else if(var[(yyvsp[(2) - (4)].in)]==4)
-			        printf("variable already declared before with the same type\n");
-			      else
-			        printf("variable already declared before with another type\n");}
+#line 402 "YaccFile.y"
+    {
+	if(var[(yyvsp[(2) - (4)].in)]==0){
+		var[(yyvsp[(2) - (4)].in)]=4;
+		int i;
+		for(i=0;i<(yyvsp[(4) - (4)].s)[0];i++)
+			D[(yyvsp[(2) - (4)].in)][i]=(yyvsp[(4) - (4)].s)[i];
+	}
+	else if(var[(yyvsp[(2) - (4)].in)]==4)
+		printf("variable already declared before with the same type\n");
+	else
+		printf("variable already declared before with another type\n");}
     break;
 
   case 44:
 /* Line 1792 of yacc.c  */
-#line 398 "YaccFile.y"
+#line 420 "YaccFile.y"
     { (yyval.f1)=-1;
-                   if(var[(yyvsp[(1) - (3)].in)]==0)
-		     printf("variable is not declared before\n");
-                   else if(var[(yyvsp[(1) - (3)].in)]==1)
-                     A[(yyvsp[(1) - (3)].in)]=(yyvsp[(3) - (3)].f1);
-		   else if(var[(yyvsp[(1) - (3)].in)]==2)
-		     B[(yyvsp[(1) - (3)].in)]=(yyvsp[(3) - (3)].f1);
-		   else
-		     printf("not accurate input with assignment\n");}
+	if(var[(yyvsp[(1) - (3)].in)]==0)
+		printf("variable is not declared before\n");
+	else if(var[(yyvsp[(1) - (3)].in)]==1)
+		A[(yyvsp[(1) - (3)].in)]=(yyvsp[(3) - (3)].f1);
+	else if(var[(yyvsp[(1) - (3)].in)]==2)
+		B[(yyvsp[(1) - (3)].in)]=(yyvsp[(3) - (3)].f1);
+	else
+		printf("not accurate input with assignment\n");}
     break;
 
   case 45:
 /* Line 1792 of yacc.c  */
-#line 408 "YaccFile.y"
+#line 436 "YaccFile.y"
     {(yyval.f1)=(yyvsp[(1) - (3)].f1)+(yyvsp[(3) - (3)].f1);}
     break;
 
   case 46:
 /* Line 1792 of yacc.c  */
-#line 409 "YaccFile.y"
+#line 437 "YaccFile.y"
     {(yyval.f1)=(yyvsp[(1) - (3)].f1)-(yyvsp[(3) - (3)].f1);}
     break;
 
   case 47:
 /* Line 1792 of yacc.c  */
-#line 410 "YaccFile.y"
+#line 438 "YaccFile.y"
     {(yyval.f1)=(yyvsp[(1) - (1)].f1);}
     break;
 
   case 48:
 /* Line 1792 of yacc.c  */
-#line 412 "YaccFile.y"
+#line 446 "YaccFile.y"
     {(yyval.f1)=(yyvsp[(1) - (3)].f1)*(yyvsp[(3) - (3)].f1);}
     break;
 
   case 49:
 /* Line 1792 of yacc.c  */
-#line 413 "YaccFile.y"
-    {if((yyvsp[(3) - (3)].f1)==0)
-                         printf("can not divide by zero\n");
-                       else
-		         (yyval.f1)=(yyvsp[(1) - (3)].f1)/(yyvsp[(3) - (3)].f1);}
+#line 447 "YaccFile.y"
+    {
+		if((yyvsp[(3) - (3)].f1)==0)
+            printf("can not divide by zero\n");
+        else
+		    (yyval.f1)=(yyvsp[(1) - (3)].f1)/(yyvsp[(3) - (3)].f1);
+	}
     break;
 
   case 50:
 /* Line 1792 of yacc.c  */
-#line 417 "YaccFile.y"
+#line 454 "YaccFile.y"
     {(yyval.f1)=(yyvsp[(1) - (1)].f1);}
     break;
 
   case 51:
 /* Line 1792 of yacc.c  */
-#line 419 "YaccFile.y"
+#line 462 "YaccFile.y"
     {(yyval.f1)=(yyvsp[(2) - (3)].f1);}
     break;
 
   case 53:
 /* Line 1792 of yacc.c  */
-#line 421 "YaccFile.y"
+#line 464 "YaccFile.y"
     {(yyval.f1)=(yyvsp[(1) - (1)].in);}
     break;
 
   case 54:
 /* Line 1792 of yacc.c  */
-#line 422 "YaccFile.y"
+#line 465 "YaccFile.y"
     {(yyval.f1)=(yyvsp[(1) - (1)].f1);}
     break;
 
   case 55:
 /* Line 1792 of yacc.c  */
-#line 423 "YaccFile.y"
-    {if(var[(yyvsp[(1) - (1)].in)]==1)
-	               (yyval.f1)=A[(yyvsp[(1) - (1)].in)];
-	             else
-	               if(var[(yyvsp[(1) - (1)].in)]==2)
-		         (yyval.f1)=B[(yyvsp[(1) - (1)].in)];
-		       else
-		         printf("not accurate variable\n");}
+#line 466 "YaccFile.y"
+    {
+	if(var[(yyvsp[(1) - (1)].in)]==1)
+		(yyval.f1)=A[(yyvsp[(1) - (1)].in)];
+		else if(var[(yyvsp[(1) - (1)].in)]==2)(yyval.f1)=B[(yyvsp[(1) - (1)].in)];
+		else printf("not accurate variable\n");
+	}
     break;
 
 
 /* Line 1792 of yacc.c  */
-#line 2067 "YaccFile.tab.c"
+#line 2029 "YaccFile.tab.c"
       default: break;
     }
   /* User semantic actions sometimes alter yychar, and that requires
@@ -2295,13 +2257,12 @@ yyreturn:
 
 
 /* Line 2055 of yacc.c  */
-#line 431 "YaccFile.y"
+#line 474 "YaccFile.y"
 
-int yyerror(char* s)
-{
+int yyerror(char* s){
 	printf("syntax error in %s",s);
 }
-int main()
-{
+int main(){
 	yyparse();
 }
+

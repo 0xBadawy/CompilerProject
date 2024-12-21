@@ -1,4 +1,6 @@
 %option noyywrap
+%option yylineno
+
 %{
 	#include<stdio.h>
 	#include"YaccFile.tab.h"
@@ -24,8 +26,10 @@
 [a-z]     {yylval.in=*yytext-'a'; return ID;}
 [0-9]+    {yylval.in=atoi(yytext); return NUM_INT;}
 [0-9]+\.[0-9]+    {yylval.f1=atof(yytext); return NUM_FLOAT;}
-
 \'.\'      {yylval.ch=yytext[1]; return CH;}
+
+
+
 [/;=*+{}&|!<>-]   {return *yytext;}
 [()]   {return *yytext;}
 [ \t\n]    ;

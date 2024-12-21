@@ -9,7 +9,8 @@
 	int loc[26];
 	int d[3];
 	int op[3];
-// %}
+%}
+
 %union
 {
  int in;
@@ -28,7 +29,7 @@
 
 %token<in> ID
 %token<ch> CH
-%token<program> CHH
+%token<s> CHH
 %token<in> NUM_INT
 %token<f1> NUM_FLOAT 
 %token INT FLOAT CHAR STRING PRINT FOR
@@ -36,11 +37,11 @@
 
 %nonassoc UMINS
 
-%start program
+%start s
 
 %% 
 
-program: program stm
+s: s stm
     | stm
 ;
 stm: exp ';'
@@ -55,7 +56,7 @@ stm: exp ';'
 
 // ------------------------------------- for loop -------------------------------------
 
-for: FOR '('italz ';' cond ';' count')' '{' program '}'{
+for: FOR '('italz ';' cond ';' count')' '{' s '}'{
     int count_flag=0, cond_flag=0;
     if(l[op[1]]==1)cond_flag=1;
     if(d[2]==1){
@@ -241,9 +242,10 @@ count: '+' ID '+' {
 	else printf("variable not declared before\n");}
 ;
 
+
+
 // ===================================== initialization =====================================
 // -- intialize integer variable Ex=> int a=5; or a=5;
-
 
 
 italz: INT ID '=' NUM_INT {
@@ -292,10 +294,10 @@ rel:  exp '>'    exp { if($1>$3) $$=1; else $$=0; }
 	| exp '!''=' exp { if($1!=$4) $$=1; else $$=0; }
 ;
 
-incd: ID '+''+' { printf("%d\n", value[$1]); value[$1] += 1; }
-    | ID '-''-' { printf("%d\n", value[$1]); value[$1] -= 1; }
-    | '+''+' ID { value[$3] += 1; printf("%d\n", value[$3]); }
-    | '-''-' ID { value[$3] -= 1; printf("%d\n", value[$3]); }
+incd: ID '+''+' { value[$1] += 1; }
+    | ID '-''-' { value[$1] -= 1; }
+    | '+''+' ID { value[$3] += 1; }
+    | '-''-' ID { value[$3] -= 1; }
 ;
 
 
@@ -371,6 +373,7 @@ decl: INT ID{
 		printf("variable already declared before with the same type\n");
 	else
 		printf("variable already declared before with another type\n");}
+
 | CHAR ID{
 	if(var[$2]==0)
 		var[$2]=3;
@@ -378,6 +381,7 @@ decl: INT ID{
 		printf("variable already declared before with the same type\n");
 	else
 		printf("variable already declared before with another type\n");} 
+
 | CHAR ID '=' CH {
 	if(var[$2]==0){
 		var[$2]=3;
@@ -387,6 +391,7 @@ decl: INT ID{
 		printf("variable already declared before with the same type\n");
 	else
 		printf("variable already declared before with another type\n");}
+
 | STRING ID{
 	if(var[$2]==0)
 		var[$2]=4;
@@ -459,21 +464,19 @@ factor: '('exp')' {$$=$2;}
 	| '-'factor   %prec UMINS
 	| NUM_INT     {$$=$1;}
 	| NUM_FLOAT   {$$=$1;}
-	| ID          {if(var[$1]==1)
-					$$=A[$1];
-				    else
-						if(var[$1]==2)$$=B[$1];
-					else
-						printf("not accurate variable\n");
-					}
+	| ID          {
+	if(var[$1]==1)
+		$$=A[$1];
+		else if(var[$1]==2)$$=B[$1];
+		else printf("not accurate variable\n");
+	}
 ;
 
 %%
-int yyerror(char* s)
-{
+int yyerror(char* s){
 	printf("syntax error in %s",s);
 }
-int main()
-{
+int main(){
 	yyparse();
 }
+

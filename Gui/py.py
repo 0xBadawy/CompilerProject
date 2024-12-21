@@ -17,6 +17,7 @@ def compile_program():
         print(result.stdout)
 
 def handel_output(text):
+    pass
     
 
 def use_GUI():
