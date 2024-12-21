@@ -17,16 +17,28 @@ def compile_program():
         print(result.stdout)
 
 def handel_output(text):
-    pass
+    errorText = "Errors:\n"
+    outputText = ""
+    
+    for line in text.split("\n"):
+        if "syntax" in line.lower():
+            errorText += line + "\n"
+        else:
+            outputText += line + "\n"
+    result_output.delete("1.0", tk.END)
+    result_output.insert(tk.END, outputText)
+    result_output_bottom.delete("1.0", tk.END)
+    result_output_bottom.insert(tk.END, errorText)
+    
+    
+    
     
 
 def use_GUI():
     user_input = text_input.get("1.0", tk.END).strip()  
     process = subprocess.Popen(["Compiler\\program.exe"], stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
     stdout, stderr = process.communicate(input=user_input.encode())  
-    result_output.delete("1.0", tk.END)  
-    result_output.insert(tk.END, stdout.decode())  
-    print(stdout.decode())
+    handel_output(stdout.decode())
 
 
 
