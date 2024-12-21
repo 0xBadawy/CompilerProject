@@ -3,23 +3,9 @@ import customtkinter as ctk
 import subprocess
 import os
 
-def compile_program():
-    commands = [
-        "flex LexFile.l",
-        "yacc -d YaccFile.y",
-        "gcc lex.yy.c -o lexer",
-        "gcc YaccFile.tab.c lex.yy.c -o program",
-    ]
-    print("Opening current directory" + os.getcwd())
-    for command in commands:      
-        print(f"Running: {command}")
-        result = subprocess.run(command, shell=True, check=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
-        print(result.stdout)
-
 def handel_output(text):
-    errorText = "Errors:\n"
-    outputText = ""
-    
+    errorText = "Errors:\n____________________\n"
+    outputText = ""    
     for line in text.split("\n"):
         if "syntax" in line.lower():
             errorText += line + "\n"
@@ -30,16 +16,11 @@ def handel_output(text):
     result_output_bottom.delete("1.0", tk.END)
     result_output_bottom.insert(tk.END, errorText)
     
-    
-    
-    
-
-def use_GUI():
+def use_subprocess():
     user_input = text_input.get("1.0", tk.END).strip()  
     process = subprocess.Popen(["Compiler\\program.exe"], stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
     stdout, stderr = process.communicate(input=user_input.encode())  
     handel_output(stdout.decode())
-
 
 
 ctk.set_appearance_mode("light")  
@@ -69,7 +50,7 @@ result_output_bottom.grid(row=3, column=3, rowspan=1,columnspan=2, padx=10, pady
 
 
 
-run_button = ctk.CTkButton(root, text="◀ Run Code ", command=use_GUI, width=150, height=40, font=("Consolas", 15, "bold"))
+run_button = ctk.CTkButton(root, text="◀ Run Code ", command=use_subprocess, width=150, height=40, font=("Consolas", 15, "bold"))
 run_button.grid(row=0, column=4,padx=10, pady=1)
 
 root.mainloop()
