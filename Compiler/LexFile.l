@@ -1,10 +1,14 @@
 %option noyywrap
+
+
 %{
 	#include<stdio.h>
 	#include"YaccFile.tab.h"
 %}
 
+
 %%
+
 "print"  {return PRINT;}
 "int"    {return INT;}
 "float"  {return FLOAT;}
@@ -14,11 +18,13 @@
 "then"   {return THEN;}
 "else"   {return ELSE;}
 "for"    {return FOR;}
+
 \".+\"   {yylval.s[0]=yyleng-1;
           int i;
           for(i=1;i<yylval.s[0];i++)
 	      yylval.s[i]=yytext[i];
 	      return CHH;}
+
 [a-z]     		  {yylval.in=*yytext-'a'; return ID;}
 [0-9]+    		  {yylval.in=atoi(yytext); return NUM_INT;}
 [0-9]+\.[0-9]+    {yylval.f1=atof(yytext); return NUM_FLOAT;}
@@ -26,4 +32,5 @@
 [/;=*+{}&|!<>-]   {return *yytext;}
 [()]   			  {return *yytext;}
 [ \t\n]    		  ;
+
 %%
