@@ -1,6 +1,4 @@
 %option noyywrap
-
-
 %{
 	#include<stdio.h>
 	#include"YaccFile.tab.h"
@@ -8,7 +6,6 @@
 
 
 %%
-
 "print"  {return PRINT;}
 "int"    {return INT;}
 "float"  {return FLOAT;}
@@ -32,5 +29,4 @@
 [/;=*+{}&|!<>-]   {return *yytext;}
 [()]   			  {return *yytext;}
 [ \t\n]    		  ;
-
 %%

@@ -5,3 +5,4 @@
 *.tab.h
 Compiler/lex.yy.c
 Compiler/lex.yy.c
+.vscode
