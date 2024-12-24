@@ -20,7 +20,7 @@ def handle_output(output):
 
 def run_code():
     user_code = code_input.get("1.0", tk.END).strip()
-    process = subprocess.Popen(["../Compiler/program.exe"], stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+    process = subprocess.Popen(["../src/program.exe"], stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
     stdout, stderr = process.communicate(input=user_code.encode())
     handle_output(stdout.decode())
 
