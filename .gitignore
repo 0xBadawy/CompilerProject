@@ -1,4 +1,7 @@
 *.lex.yy.c
+*.c
 *.exe
 *.tab.c
 *.tab.h
+Compiler/lex.yy.c
+Compiler/lex.yy.c

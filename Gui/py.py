@@ -5,12 +5,9 @@ import subprocess
 def handle_output(output):
     error_text = ""
     result_text = ""
-
     for line in output.split("\n"):
-        if "syntax" in line.lower():
-            error_text += line + "\n"
-        else:
-            result_text += line + "\n"
+        if "syntax" in line.lower():error_text += line + "\n"
+        else:result_text += line + "\n"
 
     output_textbox.delete("1.0", tk.END)
     output_textbox.insert(tk.END, result_text)
