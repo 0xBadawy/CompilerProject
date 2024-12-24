@@ -395,9 +395,9 @@ static char *yy_last_accepting_cpos;
 char *yytext;
 #line 1 "LexFile.l"
 #define INITIAL 0
-#line 4 "LexFile.l"
-    #include<stdio.h>
-    #include"YaccFile.tab.h"
+#line 5 "LexFile.l"
+	#include<stdio.h>
+	#include"YaccFile.tab.h"
 #line 402 "lex.yy.c"
 
 /* Macros after this point can all be overridden by user definitions in
@@ -549,7 +549,7 @@ YY_DECL
 	register char *yy_cp, *yy_bp;
 	register int yy_act;
 
-#line 8 "LexFile.l"
+#line 10 "LexFile.l"
 
 
 #line 556 "lex.yy.c"
@@ -637,96 +637,96 @@ do_action:	/* This label is used only to access EOF actions. */
 
 case 1:
 YY_RULE_SETUP
-#line 10 "LexFile.l"
-{ return PRINT; }
+#line 12 "LexFile.l"
+{return PRINT;}
 	YY_BREAK
 case 2:
 YY_RULE_SETUP
-#line 11 "LexFile.l"
-{ return INT; }
+#line 13 "LexFile.l"
+{return INT;}
 	YY_BREAK
 case 3:
 YY_RULE_SETUP
-#line 12 "LexFile.l"
-{ return FLOAT; }
+#line 14 "LexFile.l"
+{return FLOAT;}
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
-#line 13 "LexFile.l"
-{ return CHAR; }
+#line 15 "LexFile.l"
+{return CHAR;}
 	YY_BREAK
 case 5:
 YY_RULE_SETUP
-#line 14 "LexFile.l"
-{ return STRING; }
+#line 16 "LexFile.l"
+{return STRING;}
 	YY_BREAK
 case 6:
 YY_RULE_SETUP
-#line 15 "LexFile.l"
-{ return IF; }
+#line 17 "LexFile.l"
+{return IF;}
 	YY_BREAK
 case 7:
 YY_RULE_SETUP
-#line 16 "LexFile.l"
-{ return THEN; }
+#line 18 "LexFile.l"
+{return THEN;}
 	YY_BREAK
 case 8:
 YY_RULE_SETUP
-#line 17 "LexFile.l"
-{ return ELSE; }
+#line 19 "LexFile.l"
+{return ELSE;}
 	YY_BREAK
 case 9:
 YY_RULE_SETUP
-#line 18 "LexFile.l"
-{ return FOR; }
+#line 20 "LexFile.l"
+{return FOR;}
 	YY_BREAK
 case 10:
 YY_RULE_SETUP
-#line 20 "LexFile.l"
-{ yylval.str[0] = yyleng - 1;
-           int i;
-           for(i = 1; i < yylval.str[0]; i++)
-               yylval.str[i] = yytext[i];
-           return STRING_LITERAL; }
+#line 22 "LexFile.l"
+{yylval.s[0]=yyleng-1;
+          int i;
+          for(i=1;i<yylval.s[0];i++)
+	      yylval.s[i]=yytext[i];
+	      return CHH;}
 	YY_BREAK
 case 11:
 YY_RULE_SETUP
-#line 26 "LexFile.l"
-{ yylval.id = *yytext - 'a'; return ID; }
+#line 28 "LexFile.l"
+{yylval.in=*yytext-'a'; return ID;}
 	YY_BREAK
 case 12:
 YY_RULE_SETUP
-#line 27 "LexFile.l"
-{ yylval.int_val = atoi(yytext); return NUM_INT; }
+#line 29 "LexFile.l"
+{yylval.in=atoi(yytext); return NUM_INT;}
 	YY_BREAK
 case 13:
 YY_RULE_SETUP
-#line 28 "LexFile.l"
-{ yylval.float_val = atof(yytext); return NUM_FLOAT; }
+#line 30 "LexFile.l"
+{yylval.f1=atof(yytext); return NUM_FLOAT;}
 	YY_BREAK
 case 14:
 YY_RULE_SETUP
-#line 29 "LexFile.l"
-{ yylval.char_val = yytext[1]; return CHAR_LITERAL; }
+#line 31 "LexFile.l"
+{yylval.ch=yytext[1]; return CH;}
 	YY_BREAK
 case 15:
 YY_RULE_SETUP
-#line 30 "LexFile.l"
-{ return *yytext; }
+#line 32 "LexFile.l"
+{return *yytext;}
 	YY_BREAK
 case 16:
 YY_RULE_SETUP
-#line 31 "LexFile.l"
-{ return *yytext; }
+#line 33 "LexFile.l"
+{return *yytext;}
 	YY_BREAK
 case 17:
 YY_RULE_SETUP
-#line 32 "LexFile.l"
+#line 34 "LexFile.l"
 ;
 	YY_BREAK
 case 18:
 YY_RULE_SETUP
-#line 34 "LexFile.l"
+#line 36 "LexFile.l"
 ECHO;
 	YY_BREAK
 #line 733 "lex.yy.c"
@@ -1615,4 +1615,4 @@ int main()
 	return 0;
 	}
 #endif
-#line 34 "LexFile.l"
+#line 36 "LexFile.l"

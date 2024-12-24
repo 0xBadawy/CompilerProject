@@ -2,12 +2,15 @@ import tkinter as tk
 import customtkinter as ctk
 import subprocess
 
+ 
 def handle_output(output):
     error_text = ""
     result_text = ""
     for line in output.split("\n"):
-        if "syntax" in line.lower():error_text += line + "\n"
-        else:result_text += line + "\n"
+        if "Error :"  in line or "Debug :" in line:
+            error_text += line + "\n"
+        else:
+            result_text += line + "\n"
 
     output_textbox.delete("1.0", tk.END)
     output_textbox.insert(tk.END, result_text)
@@ -17,7 +20,7 @@ def handle_output(output):
 
 def run_code():
     user_code = code_input.get("1.0", tk.END).strip()
-    process = subprocess.Popen(["Compiler\\program.exe"], stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+    process = subprocess.Popen(["../Compiler/program.exe"], stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
     stdout, stderr = process.communicate(input=user_code.encode())
     handle_output(stdout.decode())
 

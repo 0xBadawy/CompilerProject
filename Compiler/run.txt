@@ -14,6 +14,7 @@ gcc lex.yy.c -o a
 ./a.exe
 
 
+Remove-Item lex.yy.c, YaccFile.tab.c, YaccFile.tab.h, program.exe -Force
 
 // run lex only
 flex text1.l; gcc lex.yy.c -o a; ./a.exe
