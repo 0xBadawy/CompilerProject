@@ -68,13 +68,13 @@ error_textbox.pack(expand=True, fill="both", padx=10, pady=10)
 button_frame = ctk.CTkFrame(root, corner_radius=15, fg_color="#f0f0f0")
 button_frame.grid(row=3, column=0, columnspan=2, padx=10, pady=10, sticky="nsew")
 
-run_button = ctk.CTkButton(button_frame, text="🏋️ Run Code", font=("Consolas", 16, "bold"), command=run_code, width=150, height=50)
+run_button = ctk.CTkButton(button_frame, text="◀ Run Code", font=("Consolas", 16, "bold"), command=run_code, width=150, height=50)
 run_button.grid(row=0, column=0, padx=20, pady=20)
 
-clear_button = ctk.CTkButton(button_frame, text="🔄 Clear Input", font=("Consolas", 16, "bold"), command=lambda: code_input.delete("1.0", tk.END), width=150, height=50)
+clear_button = ctk.CTkButton(button_frame, text="Clear Input", font=("Consolas", 16, "bold"), command=lambda: code_input.delete("1.0", tk.END), width=150, height=50)
 clear_button.grid(row=0, column=1, padx=20, pady=20)
 
-exit_button = ctk.CTkButton(button_frame, text="❌ Exit", font=("Consolas", 16, "bold"), command=root.destroy, width=150, height=50)
+exit_button = ctk.CTkButton(button_frame, text="Exit", font=("Consolas", 16, "bold"), command=root.destroy, width=150, height=50)
 exit_button.grid(row=0, column=2, padx=20, pady=20)
 
 root.grid_rowconfigure(1, weight=3)
