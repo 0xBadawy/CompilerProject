@@ -53,8 +53,8 @@ stm: exp ';'
     | assm ';'
     | print ';'
     | if ';'
-    | for
     | count	
+    | for
 ;
 
 

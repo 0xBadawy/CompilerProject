@@ -11,7 +11,7 @@ def handle_output(output,error):
             error_text += line + "\n"
         else:
             result_text += line + "\n"
-    # error_text += error_text.strip()    
+    error_text += error_text.strip()    
     output_textbox.delete("1.0", tk.END)
     output_textbox.insert(tk.END, result_text)
 
@@ -44,7 +44,7 @@ input_frame.grid(row=1, column=0, rowspan=2, padx=10, pady=10, sticky="nsew")
 input_label = ctk.CTkLabel(input_frame, text="Code Input:", font=("Consolas", 18, "bold"))
 input_label.pack(anchor="w", padx=10, pady=(10, 5))
 
-code_input = ctk.CTkTextbox(input_frame, font=("Consolas", 16), wrap=tk.WORD, corner_radius=12, height=15, width=50)
+code_input = ctk.CTkTextbox(input_frame, font=("Consolas", 16,"bold"), wrap=tk.WORD, corner_radius=12, height=15, width=50)
 code_input.pack(expand=True, fill="both", padx=10, pady=10)
 
 output_frame = ctk.CTkFrame(root, corner_radius=15, fg_color="#e6e6e6")
