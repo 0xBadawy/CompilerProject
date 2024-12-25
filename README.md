@@ -130,7 +130,8 @@ Run `GUI.py` to start the graphical interface.
 ![alt text](Assets/Images/image.png)
 
 #### Dark Mode
-![alt text](Assets/Images/image2.png)
+![alt text](Assets/Images/Image2.png)
+
 ### Youtube Videos 
 - [How to install in VS-Code](https://www.youtube.com/watch?v=Zs99QnRUt5c&t)
 - [Arabic Flex Tutorial](https://www.youtube.com/watch?v=Zs99QnRUt5c&list=PLd_aE3prUmHfvPeSMzUou3dUEMWIAjT-X)
