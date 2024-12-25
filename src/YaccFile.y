@@ -9,7 +9,7 @@
 	int loc[26];
 	int d[3];
 	int op[3];
-%}
+// %}
 
 %union
 {

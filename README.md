@@ -51,6 +51,8 @@ flex LexFile.l; yacc -d YaccFile.y; gcc lex.yy.c -o lexer; gcc YaccFile.tab.c le
    ./program.exe
    ```
 
+![alt text](Assets/Images/Image1.png)
+
 ---
 
 ## How to Use GUI with Lex and Yacc
@@ -124,7 +126,7 @@ Run `GUI.py` to start the graphical interface.
   flex LexFile.l; yacc -d YaccFile.y; gcc lex.yy.c -o lexer; gcc YaccFile.tab.c lex.yy.c -o program
   ```
 
-
+![alt text](Assets/Images/image.png)
 ### Youtube Videos 
 - [How to install in VS-Code](https://www.youtube.com/watch?v=Zs99QnRUt5c&t)
 - [Arabic Flex Tutorial](https://www.youtube.com/watch?v=Zs99QnRUt5c&list=PLd_aE3prUmHfvPeSMzUou3dUEMWIAjT-X)
