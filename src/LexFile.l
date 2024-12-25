@@ -15,6 +15,8 @@
 "then"   {return THEN;}
 "else"   {return ELSE;}
 "for"    {return FOR;}
+"++"    {return INCREMENT;}
+"--"    {return DECREMENT;}
 
 \".+\"   {yylval.s[0]=yyleng-1;
           int i;

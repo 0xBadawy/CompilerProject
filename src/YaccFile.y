@@ -34,6 +34,8 @@
 %token<f1> NUM_FLOAT 
 %token INT FLOAT CHAR STRING PRINT FOR
 %token IF THEN ELSE
+%token INCREMENT DECREMENT
+
 
 %nonassoc UMINS
 
@@ -41,16 +43,18 @@
 
 %% 
 
-s: s stm
+s:  s stm
     | stm
 ;
+
 stm: exp ';'
-    | assm ';'
     | decl ';'
+	| incd ';'
+    | assm ';'
     | print ';'
     | if ';'
-    | count
     | for
+    | count	
 ;
 
 
@@ -118,20 +122,17 @@ for: FOR '('italz ';' cond ';' count')' '{' s '}'{
     }
 }
 ;
-
 // ------------------------------------- condition for loop -------------------------------------
-
 cond: ID '<' exp {op[0]=1; op[1]=$1; op[2]=$3;}
     | ID '>' exp {op[0]=2; op[1]=$1; op[2]=$3;}
 ;
-
 
 // ------------------------------------- counter for loop -------------------------------------
 count: '+' ID '+' {
 	if(l[$2]==1){
 		++loc[$2];
 		$$=1;
-		d[0]=1;  //mean store increment operation
+		d[0]=1;  
 		d[1]=$2;
 		d[2]=1;
 	}
@@ -150,7 +151,7 @@ count: '+' ID '+' {
 	if(l[$2]==1){
 		--loc[$2];
 		$$=1;
-		d[0]=2;  //mean store increment operation
+		d[0]=2;  
 		d[1]=$2;
 		d[2]=1;
 	}
@@ -168,7 +169,7 @@ count: '+' ID '+' {
 	if(l[$1]==1){
 		loc[$1]++;
 		$$=1;
-		d[0]=1;  //mean store increment operation
+		d[0]=1;  
 		d[1]=$1;
 		d[2]=1;
 	}
@@ -186,7 +187,7 @@ count: '+' ID '+' {
 	if(l[$1]==1){
 		loc[$1]--;
 		$$=1;
-		d[0]=2;  //mean store increment operation
+		d[0]=2;  
 		d[1]=$1;
 		d[2]=1;
 	}
@@ -288,10 +289,10 @@ rel:  exp '>'    exp { if($1>$3) $$=1; else $$=0; }
 	| exp '!''=' exp { if($1!=$4) $$=1; else $$=0; }
 ;
 
-incd: ID '+''+' { value[$1] += 1; }
-    | ID '-''-' { value[$1] -= 1; }
-    | '+''+' ID { value[$3] += 1; }
-    | '-''-' ID { value[$3] -= 1; }
+incd: ID INCREMENT { A[$1] += 1; }
+    | ID DECREMENT { A[$1] -= 1; }
+    | INCREMENT ID { A[$2] += 1; }
+    | DECREMENT ID { A[$2] -= 1; }
 ;
 
 

@@ -3,7 +3,7 @@ import customtkinter as ctk
 import subprocess
 
  
-def handle_output(output):
+def handle_output(output,error):
     error_text = ""
     result_text = ""
     for line in output.split("\n"):
@@ -11,7 +11,7 @@ def handle_output(output):
             error_text += line + "\n"
         else:
             result_text += line + "\n"
-
+    # error_text += error_text.strip()    
     output_textbox.delete("1.0", tk.END)
     output_textbox.insert(tk.END, result_text)
 
@@ -22,7 +22,7 @@ def run_code():
     user_code = code_input.get("1.0", tk.END).strip()
     process = subprocess.Popen(["../src/program.exe"], stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
     stdout, stderr = process.communicate(input=user_code.encode())
-    handle_output(stdout.decode())
+    handle_output(stdout.decode(), stderr.decode())
 
 ctk.set_appearance_mode("light")
 ctk.set_default_color_theme("blue")
