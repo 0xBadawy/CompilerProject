@@ -52,7 +52,7 @@ root.configure(padx=20, pady=20)
 header_frame = ctk.CTkFrame(root, corner_radius=15, fg_color=bg_color)
 header_frame.grid(row=0, column=0, columnspan=3, sticky="nsew", padx=10, pady=(0, 20))
 
-header_label = ctk.CTkLabel(header_frame, text=" Compiler Project", font=("Consolas", 32, "bold"))
+header_label = ctk.CTkLabel(header_frame, text="Compiler Project", font=("Consolas", 32, "bold"))
 header_label.pack(pady=10)
 
 input_frame = ctk.CTkFrame(root, corner_radius=15, fg_color=input_bg_color)

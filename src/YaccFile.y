@@ -1,15 +1,15 @@
 %{
 	#include<stdio.h>
-	int A[26];
-	float B[26];
-	char C[26];
-	char D[26][26];
-	int var[26];
-	int l[26];
-	int loc[26];
-	int d[3];
+	int A[26];    // integer array
+	float B[26];	// float array
+	char C[26];		// character array
+	char D[26][26];  // string array
+	int var[26];    // variable array
+	int l[26];     // integer variable
+	int loc[26];  // integer local variable
+	int d[3];      
 	int op[3];
-// %}
+%}
 
 %union
 {
@@ -53,8 +53,8 @@ stm: exp ';'
     | assm ';'
     | print ';'
     | if ';'
-    | count	
     | for
+    | count	
 ;
 
 
