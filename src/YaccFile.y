@@ -7,8 +7,8 @@
 	int var[26];    // variable array
 	int l[26];     // integer variable
 	int loc[26];  // integer local variable
-	int d[3];      
-	int op[3];
+	int d[5];      
+	int op[5];
 %}
 
 %union
@@ -34,9 +34,7 @@
 %token<f1> NUM_FLOAT 
 %token INT FLOAT CHAR STRING PRINT FOR
 %token IF THEN ELSE
-%token INCREMENT DECREMENT
-
-
+%token INCREMENT DECREMENT ADD_ASSIGN SUB_ASSIGN MUL_ASSIGN DIV_ASSIGN
 %nonassoc UMINS
 
 %start s
@@ -47,7 +45,7 @@ s:  s stm
     | stm
 ;
 
-stm: exp ';'
+stm:  exp ';'
     | decl ';'
 	| incd ';'
     | assm ';'
@@ -126,7 +124,6 @@ for: FOR '('italz ';' cond ';' count')' '{' s '}'{
 cond: ID '<' exp {op[0]=1; op[1]=$1; op[2]=$3;}
     | ID '>' exp {op[0]=2; op[1]=$1; op[2]=$3;}
 ;
-
 // ------------------------------------- counter for loop -------------------------------------
 count: '+' ID '+' {
 	if(l[$2]==1){
@@ -165,7 +162,7 @@ count: '+' ID '+' {
 	else printf("❌Error : wrong input\n");
 }     
 
-|ID '+''+'{
+|ID INCREMENT{
 	if(l[$1]==1){
 		loc[$1]++;
 		$$=1;
@@ -183,7 +180,7 @@ count: '+' ID '+' {
 	else printf("❌Error : wrong input\n");
 }
 
-|ID '-' '-'  {
+|ID DECREMENT  {
 	if(l[$1]==1){
 		loc[$1]--;
 		$$=1;
@@ -201,17 +198,18 @@ count: '+' ID '+' {
 	else printf("❌Error : wrong input\n");
 }
 
-| ID '=''+' NUM_INT{
+| ID ADD_ASSIGN NUM_INT{
 	if(l[$1]==1){
-		loc[$1]+=$4;
-		$$=$4;
+		loc[$1]+=$3;
+		$$=$3;
 		d[0]=1;
 		d[1]=$1;
 		d[2]=1;
 	}
 	else if(var[$1]==1){
-		A[$1]+=$4;
-		$$=$4;
+		printf("Debug : %d %d\n", A[$1], $3);
+		A[$1]+=$3;
+		$$=$3;
 		d[0]=1;
 		d[1]=$1;
 		d[2]=2;
@@ -219,22 +217,59 @@ count: '+' ID '+' {
 	else printf("❌Error : variable not declared before\n");
 }
 
-| ID '=''-' NUM_INT{
+| ID SUB_ASSIGN NUM_INT{
 	if(l[$1]==1){
-		loc[$1]-=$4;
-		$$=$4;
+		loc[$1]-=$3;
+		$$=$3;
 		d[0]=2;
 		d[1]=$1;
 		d[2]=1;
 	}
 	else if(var[$1]==1){
-		A[$1]-=$4;
-		$$=$4;
+		A[$1]-=$3;
+		$$=$3;
 		d[0]=2;
 		d[1]=$1;
 		d[2]=2;
 	}
 	else printf("❌Error : variable not declared before\n");}
+
+| ID MUL_ASSIGN NUM_INT{
+	if(l[$1]==1){
+		loc[$1]*=$3;
+		$$=$3;
+		d[0]=3;
+		d[1]=$1;
+		d[2]=1;
+	}
+	else if(var[$1]==1){
+		A[$1]*=$3;
+		$$=$3;
+		d[0]=3;
+		d[1]=$1;
+		d[2]=2;
+	}
+	else printf("❌Error : variable not declared before\n");
+}
+
+| ID DIV_ASSIGN NUM_INT{
+	if(l[$1]==1){
+		loc[$1]/=$3;
+		$$=$3;
+		d[0]=4;
+		d[1]=$1;
+		d[2]=1;
+	}
+	else if(var[$1]==1){
+		A[$1]/=$3;
+		$$=$3;
+		d[0]=4;
+		d[1]=$1;
+		d[2]=2;
+	}
+	else printf("❌Error : variable not declared before\n");
+}
+
 ;
 
 
@@ -266,12 +301,12 @@ italz: INT ID '=' NUM_INT {
 // ===================================== if condition =====================================
 
 if: IF'('log')'THEN'{'s'}'{
-	if($3==1)printf("if executed"); 
-	else printf("if not executed");}
+	if($3==1)printf("if executed\n"); 
+	else printf("if not executed\n");}
 
 | IF'('log')'THEN'{'s'}'ELSE'{'s'}' {
-	if($3==1)printf("if executed");
-	else printf("else executed");}
+	if($3==1)printf("if executed\n");
+	else printf("else executed\n");}
 ;
 
 log:  rel'&'rel {$$=$1&&$3;}
@@ -320,7 +355,7 @@ print: PRINT '(' ID ')'{
 		printf("❌Error : wrong input\n");}
 | PRINT '(' CHH ')' {
 	int x;
-	for(x=0;x<$3[0];x++)
+	for(x=1;x<$3[0];x++)
 		printf("%c", $3[x]);
     printf("\n");
     }
@@ -332,8 +367,6 @@ print: PRINT '(' ID ')'{
 
 // ===================================== declaration =====================================
 // -- declare variable as integer or float or character or string
-// -- Ex=> int a; or float b; or char c; or string d;
-// -- Ex=> int a=5; or float b=5.5; or char c='a'; or string d="hello";
 
 
 decl: INT ID{

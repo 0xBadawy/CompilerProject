@@ -24,6 +24,7 @@ def run_code():
     stdout, stderr = process.communicate(input=user_code.encode())
     handle_output(stdout.decode(), stderr.decode())
 
+# theme=
 ctk.set_appearance_mode("light")
 ctk.set_appearance_mode("dark")
 ctk.set_default_color_theme("blue")
@@ -46,7 +47,7 @@ root.title("Compiler GUI")
 
 # Define color variables
 
-root.geometry("1600x900")
+root.geometry("1400x800")
 root.configure(padx=20, pady=20)
 
 header_frame = ctk.CTkFrame(root, corner_radius=15, fg_color=bg_color)

@@ -1,3 +1,55 @@
+string s = "strignText";
+print(s);
+
+print("String");
+
+int x=10;
+print(x);
+
+float f=83.33;
+print (f);
+
+char c ='a';
+print(c);
+
+
+if(3>1)then{
+   print("if");
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 compiler project 
 (lex and yacc)
 

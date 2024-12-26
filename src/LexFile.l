@@ -17,6 +17,10 @@
 "for"    {return FOR;}
 "++"     {return INCREMENT;}
 "--"     {return DECREMENT;}
+"+="     {return ADD_ASSIGN;}
+"-="     {return SUB_ASSIGN;}
+"*="     {return MUL_ASSIGN;}
+"/="     {return DIV_ASSIGN;}
 
 \".+\"   {yylval.s[0]=yyleng-1;
           int i;
