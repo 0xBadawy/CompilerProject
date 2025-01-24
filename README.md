@@ -2,7 +2,7 @@
 
 This project involves building a compiler using Lex and Yacc. The instructions below will guide you on how to set up, run, and use a graphical user interface (GUI) with the compiler.
 
----
+----
 
 ## How to Run Lex and Yacc in Visual Studio Code
 
